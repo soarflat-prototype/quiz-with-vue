@@ -19,20 +19,24 @@ export default class Judge {
       methods: {
         next() {
           store.nextIndex();
-          store.updateIsShowQuestion(true);
-          store.updateIsShowJudge(false);
-          store.updateIsShowResult(false);
+          store.updateIsShow('question');
+        },
+        result() {
+          store.updateIsShow('result');
         }
       },
       computed: {
         correct() {
           const state = this.sharedState;
-          const correct = state.questions[state.questionIndex].correct;
-          return state.answer === correct;
+          return state.selectedAnswer === store.currentQuestion().correct;
         },
         description() {
           const state = this.sharedState;
           return this.state.descriptions[state.questionIndex];
+        },
+        canNext() {
+          const state = this.sharedState;
+          return state.questionIndex + 1 < state.questionCount;
         }
       },
     });

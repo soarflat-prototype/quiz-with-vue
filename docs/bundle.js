@@ -10268,6 +10268,10 @@ var _Judge = __webpack_require__(4);
 
 var _Judge2 = _interopRequireDefault(_Judge);
 
+var _Result = __webpack_require__(6);
+
+var _Result2 = _interopRequireDefault(_Result);
+
 var _store = __webpack_require__(5);
 
 var _store2 = _interopRequireDefault(_store);
@@ -10276,6 +10280,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 new _Question2.default(_store2.default);
 new _Judge2.default(_store2.default);
+new _Result2.default(_store2.default);
 
 /***/ }),
 /* 2 */
@@ -10310,26 +10315,21 @@ var Question = function Question(store) {
 
     methods: {
       answer: function answer(e) {
-        var answer = e.currentTarget.getAttribute('data-answer');
-        store.updateAnswer(answer);
-        store.updateIsShowQuestion(false);
-        store.updateIsShowJudge(true);
-        store.updateIsShowResult(false);
+        var selectedAnswer = e.currentTarget.getAttribute('data-answer');
+        if (selectedAnswer === store.currentQuestion().correct) {
+          store.incrementCorrectCount();
+        }
+        store.updateSelectedAnswer(selectedAnswer);
+        store.updateIsShow('judge');
       }
     },
     computed: {
       questionTitle: function questionTitle() {
-        var state = this.sharedState;
-        return state.questions[state.questionIndex].title;
+        return store.currentQuestion().title;
       },
       questionItems: function questionItems() {
-        var state = this.sharedState;
-        return state.questions[state.questionIndex].items;
+        return store.currentQuestion().items;
       }
-      // questionImage() {
-      //   return this.state.questions[this.sharedState.questionIndex].image;
-      // }
-
     }
   });
 };
@@ -10399,20 +10399,24 @@ var Judge = function Judge(store) {
     methods: {
       next: function next() {
         store.nextIndex();
-        store.updateIsShowQuestion(true);
-        store.updateIsShowJudge(false);
-        store.updateIsShowResult(false);
+        store.updateIsShow('question');
+      },
+      result: function result() {
+        store.updateIsShow('result');
       }
     },
     computed: {
       correct: function correct() {
         var state = this.sharedState;
-        var correct = state.questions[state.questionIndex].correct;
-        return state.answer === correct;
+        return state.selectedAnswer === store.currentQuestion().correct;
       },
       description: function description() {
         var state = this.sharedState;
         return this.state.descriptions[state.questionIndex];
+      },
+      canNext: function canNext() {
+        var state = this.sharedState;
+        return state.questionIndex + 1 < state.questionCount;
       }
     }
   });
@@ -10432,9 +10436,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 var store = {
   debug: true,
+
   state: {
     questionIndex: 0,
-    questionCount: 5,
+    questionCount: 3,
     correctCount: 0,
     questions: [{
       correct: '2',
@@ -10449,35 +10454,82 @@ var store = {
       title: '龍狩りは？',
       items: ['オーンスタイン', 'ゴー', 'キアラン']
     }],
-    answer: null,
-    isEndQuiz: false,
-    isShowQuestion: true,
-    isShowJudge: false,
-    isShowResult: false
+    selectedAnswer: null,
+    isShow: {
+      question: true,
+      judge: false,
+      result: false
+    },
+    isEndQuiz: false
+  },
+
+  currentQuestion: function currentQuestion() {
+    return this.state.questions[this.state.questionIndex];
   },
   nextIndex: function nextIndex() {
     if (this.debug) console.log('nextIndex triggered');
     this.state.questionIndex += 1;
   },
-  updateAnswer: function updateAnswer(answer) {
-    if (this.debug) console.log('updateAnswer triggered');
+  incrementCorrectCount: function incrementCorrectCount() {
+    if (this.debug) console.log('incrementCorrectCount triggered');
+    this.state.correctCount += 1;
+  },
+  updateSelectedAnswer: function updateSelectedAnswer(answer) {
+    if (this.debug) console.log('updateSelectedAnswer triggered');
     this.state.answer = answer;
   },
-  updateIsShowQuestion: function updateIsShowQuestion(isShow) {
-    if (this.debug) console.log('updateIsShowQuestion triggered');
-    this.state.isShowQuestion = isShow;
-  },
-  updateIsShowJudge: function updateIsShowJudge(isShow) {
-    if (this.debug) console.log('updateIsShowJudge triggered');
-    this.state.isShowJudge = isShow;
-  },
-  updateIsShowResult: function updateIsShowResult(isShow) {
-    if (this.debug) console.log('updateIsShowResult triggered');
-    this.state.isShowResult = isShow;
+  updateIsShow: function updateIsShow(el) {
+    if (this.debug) console.log('updateIsShow triggered');
+    for (var key in this.state.isShow) {
+      if (this.state.isShow.hasOwnProperty(key)) {
+        this.state.isShow[key] = false;
+      } else {
+        console.error('not find ' + key);
+      }
+    }
+    this.state.isShow[el] = true;
   }
 };
 
 exports.default = store;
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _vue = __webpack_require__(0);
+
+var _vue2 = _interopRequireDefault(_vue);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Result = function Result(store) {
+  _classCallCheck(this, Result);
+
+  new _vue2.default({
+    el: '#result',
+    data: function data() {
+      return {
+        state: {},
+        sharedState: store.state
+      };
+    },
+
+    methods: {},
+    computed: {}
+  });
+};
+
+exports.default = Result;
 
 /***/ })
 /******/ ]);

@@ -12,22 +12,21 @@ export default class Question {
       },
       methods: {
         answer(e) {
-          const answer = e.currentTarget.getAttribute('data-answer');
-          store.updateAnswer(answer);
-          store.updateIsShowQuestion(false);
-          store.updateIsShowJudge(true);
-          store.updateIsShowResult(false);
+          const selectedAnswer = e.currentTarget.getAttribute('data-answer');
+          if (selectedAnswer === store.currentQuestion().correct) {
+            store.incrementCorrectCount();
+          }
+          store.updateSelectedAnswer(selectedAnswer);
+          store.updateIsShow('judge');
         }
       },
       computed: {
         questionTitle() {
-          const state = this.sharedState;
-          return state.questions[state.questionIndex].title;
+          return store.currentQuestion().title;
         },
         questionItems() {
-          const state = this.sharedState;
-          return state.questions[state.questionIndex].items;
-        }
+          return store.currentQuestion().items;
+        },
         // questionImage() {
         //   return this.state.questions[this.sharedState.questionIndex].image;
         // }

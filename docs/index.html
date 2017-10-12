@@ -10,7 +10,7 @@
     <h1>Quiz with Vue</h1>
     <div class="quiz">
 
-      <div id="question" class="question" v-show="sharedState.isShowQuestion">
+      <div id="question" class="question" v-show="sharedState.isShow.question">
         <div class="question-unit">
           <span class="question-title">{{questionTitle}}</span>
           <!--<img class="question-image" :src="questionImage">-->
@@ -26,21 +26,27 @@
           </ul>
         </div>
       </div>
+      
+      <div id="judge" class="judge" v-show="sharedState.isShow.judge">
+        <div class="judge-correct" v-show="correct">
+          <div class="judge-description">
+            {{description}}
+          </div>
+        </div>
+        <div class="judge-incorrect" v-show="!correct">
+          <div class="judge-description">
+            {{description}}
+          </div>
+        </div>
+        <div class="judge-next" v-show="canNext" @click="next">次へ</div>
+        <div class="judge-result" v-show="!canNext" @click="result">結果へ</div>
+      </div>
     </div>
 
-    <div id="judge" class="judge" v-show="sharedState.isShowJudge">
-      <div class="judge-correct" v-show="correct">
-        <div class="judge-description">
-          {{description}}
-        </div>
-      </div>
-      <div class="judge-incorrect" v-show="!correct">
-        <div class="judge-description">
-          {{description}}
-        </div>
-      </div>
-      <div class="judge-next" @click="next">次へ</div>
+    <div id="result" class="result" v-show="sharedState.isShow.result">
+      {{sharedState.correctCount}}問正解
     </div>
+
   </div>
   <script src="bundle.js"></script>
 </body>

@@ -1,8 +1,9 @@
 const store = {
   debug: true,
+
   state: {
     questionIndex: 0,
-    questionCount: 5,
+    questionCount: 3,
     correctCount: 0,
     questions: [
       {
@@ -19,36 +20,45 @@ const store = {
         items: ['オーンスタイン', 'ゴー', 'キアラン']
       }
     ],
-    answer: null,
+    selectedAnswer: null,
+    isShow: {
+      question: true,
+      judge: false,
+      result: false,
+    },
     isEndQuiz: false,
-    isShowQuestion: true,
-    isShowJudge: false,
-    isShowResult: false,
   },
+
+  currentQuestion() {
+    return this.state.questions[this.state.questionIndex];
+  },
+
   nextIndex() {
     if (this.debug) console.log('nextIndex triggered');
     this.state.questionIndex += 1;
   },
 
-  updateAnswer(answer) {
-    if (this.debug) console.log('updateAnswer triggered');
+  incrementCorrectCount() {
+    if (this.debug) console.log('incrementCorrectCount triggered');
+    this.state.correctCount += 1;
+  },
+
+  updateSelectedAnswer(answer) {
+    if (this.debug) console.log('updateSelectedAnswer triggered');
     this.state.answer = answer;
   },
 
-  updateIsShowQuestion(isShow) {
-    if (this.debug) console.log('updateIsShowQuestion triggered');
-    this.state.isShowQuestion = isShow;
+  updateIsShow(el) {
+    if (this.debug) console.log('updateIsShow triggered');
+    for (let key in this.state.isShow) {
+      if (this.state.isShow.hasOwnProperty(key)) {
+        this.state.isShow[key] = false;
+      } else {
+        console.error(`not find ${key}`);
+      }
+    }
+    this.state.isShow[el] = true;
   },
-
-  updateIsShowJudge(isShow) {
-    if (this.debug) console.log('updateIsShowJudge triggered');
-    this.state.isShowJudge = isShow;
-  },
-
-  updateIsShowResult(isShow) {
-    if (this.debug) console.log('updateIsShowResult triggered');
-    this.state.isShowResult = isShow;
-  }
 };
 
 export default store;
