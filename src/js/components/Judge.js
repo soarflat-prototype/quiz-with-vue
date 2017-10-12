@@ -28,7 +28,7 @@ export default class Judge {
       computed: {
         correct() {
           const state = this.sharedState;
-          return state.selectedAnswer === store.currentQuestion().correct;
+          return this.sharedState.selectedAnswer === store.currentQuestion().correct;
         },
         description() {
           const state = this.sharedState;

@@ -45,7 +45,7 @@ const store = {
 
   updateSelectedAnswer(answer) {
     if (this.debug) console.log('updateSelectedAnswer triggered');
-    this.state.answer = answer;
+    this.state.selectedAnswer = answer;
   },
 
   updateIsShow(el) {

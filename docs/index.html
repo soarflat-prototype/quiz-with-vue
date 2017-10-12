@@ -26,25 +26,23 @@
           </ul>
         </div>
       </div>
-      
+
       <div id="judge" class="judge" v-show="sharedState.isShow.judge">
         <div class="judge-correct" v-show="correct">
-          <div class="judge-description">
-            {{description}}
-          </div>
+          <span class="judge-title">正解</span>
+          <p class="judge-description">{{description}}</p>
         </div>
         <div class="judge-incorrect" v-show="!correct">
-          <div class="judge-description">
-            {{description}}
-          </div>
+          <span class="judge-title">不正解</span>
+          <p class="judge-description">{{description}}</p>
         </div>
-        <div class="judge-next" v-show="canNext" @click="next">次へ</div>
-        <div class="judge-result" v-show="!canNext" @click="result">結果へ</div>
+        <div class="judge-button" v-show="canNext" @click="next">次へ</div>
+        <div class="judge-button" v-show="!canNext" @click="result">結果へ</div>
       </div>
-    </div>
 
-    <div id="result" class="result" v-show="sharedState.isShow.result">
-      {{sharedState.correctCount}}問正解
+      <div id="result" class="result" v-show="sharedState.isShow.result">
+        {{sharedState.correctCount}}問正解
+      </div>
     </div>
 
   </div>

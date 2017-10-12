@@ -27,9 +27,15 @@ button {
 .quiz {
   margin-top: 20px;
   width: 1000px;
+  height: 500px;
+  border: 1px solid #000;
 }
 
 .question {
+  display: flex;
+  align-items: center;
+  height: 100%;
+
   &::after {
     content: '';
     display: block;
@@ -37,10 +43,9 @@ button {
   }
 
   .question-unit {
-    float: left;
-    padding: 20px;
-    box-sizing: border-box;
+    flex-grow: 1;
     width: 50%;
+    padding: 50px;
   }
 
   .question-title {
@@ -53,6 +58,45 @@ button {
   .question-list {
     > li {
       cursor: pointer;
+      display: block;
+      margin: 20px auto 0 auto;
+      padding: 20px;
+      width: 100%;
+      box-sizing: border-box;
+      color: #fff;
+      text-align: center;
+      background: #000;
+
+      &:first-child {
+        margin-top: 0;
+      }
     }
+  }
+}
+
+.judge {
+  .judge-title {
+    display: block;
+    margin-top: 50px;
+    font-size: 40px;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .judge-description {
+    margin-top: 30px;
+    padding: 0 100px;
+  }
+
+  .judge-button {
+    cursor: pointer;
+    display: block;
+    margin: 50px auto 0 auto;
+    padding: 15px;
+    width: 200px;
+    box-sizing: border-box;
+    color: #fff;
+    text-align: center;
+    background: #000;
   }
 }

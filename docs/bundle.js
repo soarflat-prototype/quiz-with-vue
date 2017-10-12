@@ -10268,11 +10268,11 @@ var _Judge = __webpack_require__(4);
 
 var _Judge2 = _interopRequireDefault(_Judge);
 
-var _Result = __webpack_require__(6);
+var _Result = __webpack_require__(5);
 
 var _Result2 = _interopRequireDefault(_Result);
 
-var _store = __webpack_require__(5);
+var _store = __webpack_require__(6);
 
 var _store2 = _interopRequireDefault(_store);
 
@@ -10408,7 +10408,7 @@ var Judge = function Judge(store) {
     computed: {
       correct: function correct() {
         var state = this.sharedState;
-        return state.selectedAnswer === store.currentQuestion().correct;
+        return this.sharedState.selectedAnswer === store.currentQuestion().correct;
       },
       description: function description() {
         var state = this.sharedState;
@@ -10426,6 +10426,44 @@ exports.default = Judge;
 
 /***/ }),
 /* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _vue = __webpack_require__(0);
+
+var _vue2 = _interopRequireDefault(_vue);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Result = function Result(store) {
+  _classCallCheck(this, Result);
+
+  new _vue2.default({
+    el: '#result',
+    data: function data() {
+      return {
+        state: {},
+        sharedState: store.state
+      };
+    },
+
+    methods: {},
+    computed: {}
+  });
+};
+
+exports.default = Result;
+
+/***/ }),
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10476,7 +10514,7 @@ var store = {
   },
   updateSelectedAnswer: function updateSelectedAnswer(answer) {
     if (this.debug) console.log('updateSelectedAnswer triggered');
-    this.state.answer = answer;
+    this.state.selectedAnswer = answer;
   },
   updateIsShow: function updateIsShow(el) {
     if (this.debug) console.log('updateIsShow triggered');
@@ -10492,44 +10530,6 @@ var store = {
 };
 
 exports.default = store;
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _vue = __webpack_require__(0);
-
-var _vue2 = _interopRequireDefault(_vue);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Result = function Result(store) {
-  _classCallCheck(this, Result);
-
-  new _vue2.default({
-    el: '#result',
-    data: function data() {
-      return {
-        state: {},
-        sharedState: store.state
-      };
-    },
-
-    methods: {},
-    computed: {}
-  });
-};
-
-exports.default = Result;
 
 /***/ })
 /******/ ]);
