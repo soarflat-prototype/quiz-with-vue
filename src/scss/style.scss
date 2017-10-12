@@ -1,54 +1,57 @@
 @import 'node_modules/reset-css/_reset';
 
-*{
+* {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   -webkit-box-shadow: none;
   box-shadow: none;
   outline: none;
 }
 
-html{
+html {
   font-family: "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN W3", Helvetica, Arial, "モリサワ 新ゴ R", "Droid Sans", メイリオ, "sans-serif";
 }
 
-button{
+button {
   border: 1px solid #000;
 }
 
-.container{
+.container {
   width: 1000px;
   margin: 0 auto;
 
-  h1{
+  h1 {
     margin-top: 20px;
   }
 }
 
-.question{
-  width: 1000px;
+.quiz {
   margin-top: 20px;
-  &::after{
+  width: 1000px;
+}
+
+.question {
+  &::after {
     content: '';
     display: block;
     clear: both;
   }
 
-  .question-unit{
+  .question-unit {
     float: left;
     padding: 20px;
     box-sizing: border-box;
     width: 50%;
   }
 
-  .question-title{
+  .question-title {
     display: block;
     font-size: 20px;
     font-weight: bold;
     text-align: center;
   }
 
-  .question-list{
-    > li{
+  .question-list {
+    > li {
       cursor: pointer;
     }
   }
