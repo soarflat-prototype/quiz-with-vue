@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz with Vue</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Quiz with Vue</h1>
+    <div id="quiz">
+
+      <div id="question" class="question" v-show="sharedState.isShowQuestion">
+        <div class="question-unit">
+          <span class="question-title">{{questionTitle}}</span>
+          <!--<img class="question-image" :src="questionImage">-->
+        </div>
+        <div class="question-unit">
+          <ul class="question-list">
+            <li
+              v-for="(item, index) in questionItems"
+              :data-answer="index + 1"
+              @click="answer">
+              {{item}}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div id="judge" class="judge" v-show="sharedState.isShowJudge">
+      <div class="judge-correct" v-show="correct">
+        <div class="judge-description">
+          {{description}}
+        </div>
+      </div>
+      <div class="judge-incorrect" v-show="!correct">
+        <div class="judge-description">
+          {{description}}
+        </div>
+      </div>
+      <div class="judge-next" @click="next">次へ</div>
+    </div>
+  </div>
+  <script src="bundle.js"></script>
+</body>
+</html>
