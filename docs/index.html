@@ -13,7 +13,7 @@
       <div id="question" class="question" v-show="sharedState.isShow.question">
         <div class="question-unit">
           <span class="question-title">{{questionTitle}}</span>
-          <!--<img class="question-image" :src="questionImage">-->
+          <img class="question-image" :src="questionImage">
         </div>
         <div class="question-unit">
           <ul class="question-list">
@@ -33,15 +33,18 @@
           <p class="judge-description">{{description}}</p>
         </div>
         <div class="judge-incorrect" v-show="!correct">
-          <span class="judge-title">不正解</span>
+          <span class="judge-title">不正解（正解は{{correctAnswer}}）</span>
           <p class="judge-description">{{description}}</p>
         </div>
-        <div class="judge-button" v-show="canNext" @click="next">次へ</div>
-        <div class="judge-button" v-show="!canNext" @click="result">結果へ</div>
+        <div class="judge-bottom">
+          <div class="judge-button" v-show="canNext" @click="next">次へ</div>
+          <div class="judge-button" v-show="!canNext" @click="result">結果へ</div>
+          <a class="judge-button" :href="detailLink" v-show="!correct" target="_blank">詳細</a>
+        </div>
       </div>
 
       <div id="result" class="result" v-show="sharedState.isShow.result">
-        {{sharedState.correctCount}}問正解
+        <span class="result-count">{{sharedState.correctCount}}問正解!!</span>
       </div>
     </div>
 

@@ -9,15 +9,21 @@ const store = {
       {
         correct: '2',
         title: '薪の王は？',
-        items: ['グウィンドリン', 'グウィン', 'レスター']
+        image: 'images/gwin.jpg',
+        items: ['グウィンドリン', 'グウィン', 'レスター'],
+        detailLink: 'https://dic.pixiv.net/a/%E8%96%AA%E3%81%AE%E7%8E%8B%E3%82%B0%E3%82%A6%E3%82%A3%E3%83%B3',
       }, {
         correct: '3',
         title: '深淵歩きは?',
-        items: ['オーンスタイン', 'スモウ', 'アルトリウス']
+        image: 'images/artorius.jpg',
+        items: ['オーンスタイン', 'スモウ', 'アルトリウス'],
+        detailLink: 'https://dic.pixiv.net/a/%E6%B7%B1%E6%B7%B5%E6%AD%A9%E3%81%8D%E3%82%A2%E3%83%AB%E3%83%88%E3%83%AA%E3%82%A6%E3%82%B9',
       }, {
         correct: '1',
         title: '龍狩りは？',
-        items: ['オーンスタイン', 'ゴー', 'キアラン']
+        image: 'images/ornstein.jpg',
+        items: ['オーンスタイン', 'ゴー', 'キアラン'],
+        detailLink: 'https://dic.pixiv.net/a/%E7%AB%9C%E7%8B%A9%E3%82%8A%E3%82%AA%E3%83%BC%E3%83%B3%E3%82%B9%E3%82%BF%E3%82%A4%E3%83%B3',
       }
     ],
     selectedAnswer: null,

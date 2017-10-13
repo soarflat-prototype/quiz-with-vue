@@ -27,9 +27,9 @@ export default class Question {
         questionItems() {
           return store.currentQuestion().items;
         },
-        // questionImage() {
-        //   return this.state.questions[this.sharedState.questionIndex].image;
-        // }
+        questionImage() {
+          return store.currentQuestion().image;
+        }
       },
     });
   }
