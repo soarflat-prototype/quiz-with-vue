@@ -7,11 +7,9 @@ export default class Result {
       data() {
         return {
           state: {},
-          sharedState: store.state,
+          globalState: store.state,
         }
       },
-      methods: {},
-      computed: {},
     });
   }
 }

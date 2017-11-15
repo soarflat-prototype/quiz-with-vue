@@ -6,18 +6,19 @@ export default class Question {
       el: '#question',
       data() {
         return {
-          state: {},
-          sharedState: store.state,
+          globalState: store.state,
         }
       },
       methods: {
         answer(e) {
           const selectedAnswer = e.currentTarget.getAttribute('data-answer');
-          if (selectedAnswer === store.currentQuestion().correct) {
+
+          if (store.isCorrect(selectedAnswer)) {
             store.incrementCorrectCount();
           }
+
           store.updateSelectedAnswer(selectedAnswer);
-          store.updateIsShow('judge');
+          store.updateVisible('judge');
         }
       },
       computed: {
